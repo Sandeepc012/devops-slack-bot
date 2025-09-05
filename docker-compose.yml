@@ -1,0 +1,19 @@
+version: '3'
+services:
+  bot:
+    build: ./bot
+    environment:
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+      - SLACK_SIGNING_SECRET=${SLACK_SIGNING_SECRET}
+      - JENKINS_URL=http://jenkins:8080
+      - JENKINS_USER=${JENKINS_USER}
+      - JENKINS_TOKEN=${JENKINS_TOKEN}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - jenkins
+
+  jenkins:
+    build: ./jenkins
+    ports:
+      - "8080:8080"
